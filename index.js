@@ -103,9 +103,14 @@ function calculateEnhancementProbabilities(baseProbability, remainingAttempts, l
     }
     console.log("----------------------------------------------------------");
     // 결과 출력
+    let html = "";
+    let explanation = document.querySelector("#probabilityExplanation");
+    explanation.innerText = "";
     for (let i = 0; i <= remainingAttempts; i++) {
         console.log(`${level + i}강일 확률: ${(probabilities[i] || 0).toFixed(2)}%`);
+        html += `${level + i}강일 확률: ${(probabilities[i] || 0).toFixed(2)}%\n`;
     }
+    explanation.innerText = html;
 
 }
 
@@ -119,3 +124,11 @@ function factorial(num) {
     }
     return num * factorial(num - 1);
 }
+
+fetch('index.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    // 이제 data 객체를 사용하여 필요한 작업을 수행할 수 있습니다.
+  })
+  .catch(error => console.error('Error fetching JSON:', error));
